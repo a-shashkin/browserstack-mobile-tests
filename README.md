@@ -1,1 +1,1 @@
-# browserstack-mobile-tests
+Repository contains automated tests for mobile
