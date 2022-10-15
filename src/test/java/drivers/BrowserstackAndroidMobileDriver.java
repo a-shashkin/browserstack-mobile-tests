@@ -5,11 +5,10 @@ import io.appium.java_client.android.AndroidDriver;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
-import javax.annotation.Nonnull;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class BrowserstackMobileDriver implements WebDriverProvider {
+public class BrowserstackAndroidMobileDriver implements WebDriverProvider {
 
     public static URL getBrowserstackURL() {
         try {
