@@ -1,7 +1,9 @@
 package drivers;
 
 import com.codeborne.selenide.WebDriverProvider;
+import config.BrowserstackConfig;
 import io.appium.java_client.android.AndroidDriver;
+import org.aeonbits.owner.ConfigFactory;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
@@ -10,9 +12,12 @@ import java.net.URL;
 
 public class BrowserstackAndroidMobileDriver implements WebDriverProvider {
 
+    static BrowserstackConfig config = ConfigFactory.create(BrowserstackConfig.class);
+
     public static URL getBrowserstackURL() {
+        String url = System.getProperty("browserstackURL", config.browserstackURL());
         try {
-            return new URL("http://hub.browserstack.com/wd/hub");
+            return new URL(url);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
@@ -21,16 +26,22 @@ public class BrowserstackAndroidMobileDriver implements WebDriverProvider {
     @Override
     public WebDriver createDriver(DesiredCapabilities desiredCapabilities) {
 
+        String username = System.getProperty("browserstackUsername", config.browserstackUsername());
+        String key = System.getProperty("browserstackPassword", config.browserstackPassword());
+        String app = System.getProperty("browserstackApp", config.browserstackApp());
+        String device = System.getProperty("browserstackDevice", config.browserstackDevice());
+        String osVersion = System.getProperty("browserstackOSVersion", config.browserstackOSVersion());
+
         // Set your access credentials
-        desiredCapabilities.setCapability("browserstack.user", "alexandershashki_NRdJG7");
-        desiredCapabilities.setCapability("browserstack.key", "sGSDuq5yWZsCijivt4E7");
+        desiredCapabilities.setCapability("browserstack.user", username);
+        desiredCapabilities.setCapability("browserstack.key", key);
 
         // Set URL of the application under test
-        desiredCapabilities.setCapability("app", "bs://c700ce60cf13ae8ed97705a55b8e022f13c5827c");
+        desiredCapabilities.setCapability("app", app);
 
         // Specify device and os_version for testing
-        desiredCapabilities.setCapability("device", "Google Pixel 3");
-        desiredCapabilities.setCapability("os_version", "9.0");
+        desiredCapabilities.setCapability("device", device);
+        desiredCapabilities.setCapability("os_version", osVersion);
 
         // Set other BrowserStack capabilities
         desiredCapabilities.setCapability("project", "First Java Project");
