@@ -1,6 +1,7 @@
 package tests;
 
 import io.appium.java_client.MobileBy;
+import io.qameta.allure.AllureId;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Story;
@@ -19,6 +20,7 @@ public class BrowserstackAndroidSampleAppTest extends TestBase {
     @Tag("selenide_android")
     @Story("Проверка работы строки поиска")
     @DisplayName("Проверка выдачи результатов поиска по запросу BrowserStack")
+    @AllureId("12329")
     void searchTest() {
         $(MobileBy.AccessibilityId("Search Wikipedia")).click();
         $(MobileBy.id("org.wikipedia.alpha:id/search_src_text")).setValue("BrowserStack");
